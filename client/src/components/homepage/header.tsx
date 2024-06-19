@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FiAlignJustify } from "react-icons/fi";
 
 function Header() {
     return (
@@ -11,6 +12,9 @@ function Header() {
                 <Link href="/registerUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white rounded-lg">
                     <strong>Cadastrar-se como usuário</strong>
                 </Link>
+            </div>
+            <div className="flex lg:hidden pr-4">
+                <FiAlignJustify />
             </div>
         </header>
     )
