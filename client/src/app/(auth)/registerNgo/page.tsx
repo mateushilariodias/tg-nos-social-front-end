@@ -13,9 +13,7 @@ function RegisterNgo() {
     const [physicalAddress, setPhysicalAddress] = useState("");
     const [objectiveOfTheNgo, setObjectiveOfTheNgo] = useState("");
     const [pageName, setPageName] = useState("");
-    const [error, setError] = useState("")
-    const [success, setSuccess] = useState("")
-
+    
     return (
         <>
             <h1 className="font-bold text-2xl">Cadastro de ONG</h1>
