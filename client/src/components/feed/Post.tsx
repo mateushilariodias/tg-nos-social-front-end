@@ -113,24 +113,6 @@ function Post(props: { post: IPost }, { searchParams }: { searchParams: { id: st
         ]
     }
 
-    const editProfileMutation = useMutation({
-        mutationFn: async (data: { description: string, image: string, id: number }) => {
-            return makeRequest
-                .put(`users/update-user`, data)
-                .then((res) => {
-                    if (user) {
-                        const newUser = { description: data.description, image: data.image, id: data.id, emailNgo: ngo?.emailNgo }
-                        setUser(newUser)
-                        return res.data
-                    }
-                });
-        },
-        onSuccess: () => {
-            setEditProfile(false)
-            queryClient.invalidateQueries({ queryKey: ["profile", searchParams.id] })
-        },
-    });
-
     return (
         <div className="w-full bg-white rounded-lg p-4 shadow-md">
             <header className="flex gap-2 pb-4 border-b items-center">
