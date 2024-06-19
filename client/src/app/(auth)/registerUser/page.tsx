@@ -22,9 +22,9 @@ function RegisterUser() {
             <AuthInput newState={setPhoneNumberUser} htmlForAndNameAndId="phoneNumberUser" label="Celular:" type="tel"></AuthInput>
             <AuthInput newState={setPasswordUser} htmlForAndNameAndId="passwordUser" label="Senha:" type="password"></AuthInput>
             <AuthInput newState={setConfirmPassword} htmlForAndNameAndId="confirmPassword" label="Confirme a senha:" type="password"></AuthInput>
-            <button className="bg-blue-600 hover:bg-blue-800 py-3 font-bold text-white rounded-lg">
+            <Link href="/loginUser" className="bg-blue-600 hover:bg-blue-800 py-3 font-bold text-white rounded-lg text-center">
                 <strong>Cadastrar-se</strong>
-            </button>
+            </Link>
             <div className="flex justify-between">
                 <Link href="/loginUser"><span className="text-left underline">Logar</span></Link>
                 <Link href="/resetUserPassword"><span className="text-right underline">Redefinir senha</span></Link>

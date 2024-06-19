@@ -1,6 +1,7 @@
 "use client";
 
 import AuthInput from "@/components/common/AuthInput";
+import Link from "next/link";
 import { useState } from "react";
 
 function RegisterNgo() {
@@ -25,9 +26,9 @@ function RegisterNgo() {
             <AuthInput newState={setPhysicalAddress} htmlForAndNameAndId="physicalAddress" label="Endereço físico da ONG:" type="text"></AuthInput>
             <AuthInput newState={setObjectiveOfTheNgo} htmlForAndNameAndId="objectiveOfTheNgo" label="Objetivo da ONG:" type="text"></AuthInput>
             <AuthInput newState={setPageName} htmlForAndNameAndId="pageName" label="Nome da página:" type="text"></AuthInput>
-            <button className="bg-blue-600 hover:bg-blue-800 py-3 font-bold text-white rounded-lg">
+            <Link href="/feedNgo" className="bg-blue-600 hover:bg-blue-800 py-3 font-bold text-white rounded-lg text-center">
                 <strong>Cadastrar-se</strong>
-            </button>
+            </Link>
         </>
     );
 }
