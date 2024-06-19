@@ -72,7 +72,7 @@ function Header() {
                     {showMenu && (
                         <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px]">
                             <Link href="userConfiguration" className="border-b">Configurações do perfil</Link>
-                            <Link href="feedNGO" className="border-b">Entrar como ONG</Link>
+                            <Link href="feedNgo" className="border-b">Entrar como ONG</Link>
                             <Link href="" onClick={() => mutation.mutate()}>Logout</Link>
                         </div>
                     )}

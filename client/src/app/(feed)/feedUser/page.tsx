@@ -1,7 +1,7 @@
 
 "use client";
 
-import HeaderUser from "@/components/feed/headerUser";
+import HeaderUser from "@/components/feed/HeaderUser";
 
 function FeedUser() {
     return (
