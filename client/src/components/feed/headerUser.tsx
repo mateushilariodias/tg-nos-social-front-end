@@ -59,7 +59,7 @@ function Header() {
                 </div>
             )}
             <div >
-                <Link href="registerNGO" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
+                <Link href="registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
                     <strong>Cadastrar ONG</strong>
                 </Link>
             </div>
