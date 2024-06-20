@@ -12,20 +12,6 @@ function Header() {
     const { user, setUser } = useContext(UserContext)
     const [showMenu, setShowMenu] = useState(false)
     const [search, setSearch] = useState<string | null>(null)
-    const router = useRouter()
-
-    const mutation = useMutation({
-        mutationFn: async () => {
-            return await makeRequest.post("auth/logout").then((res) => {
-                res.data;
-            });
-        },
-        onSuccess: () => {
-            setUser(undefined);
-            localStorage.removeItem("nos-social:user");
-            router.push("/loginUser");
-        },
-    });
 
     const { data, error } = useQuery({
         queryKey: ['search'],
@@ -73,7 +59,7 @@ function Header() {
                         <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px]">
                             <Link href="userConfiguration" className="border-b">Configurações do perfil</Link>
                             <Link href="feedNgo" className="border-b">Entrar como ONG</Link>
-                            <Link href="" onClick={() => mutation.mutate()}>Logout</Link>
+                            <Link href="">Logout</Link>
                         </div>
                     )}
                 </div>
