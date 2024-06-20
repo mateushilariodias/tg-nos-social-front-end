@@ -11,8 +11,6 @@ function UserConfiguration() {
     const [phoneNumberUser, setPhoneNumberUser] = useState("");
     const [passwordUser, setPasswordUser] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("")
-    const [success, setSuccess] = useState("")
     const [profilePicture, setProfilePicture] = useState<string>('');
 
     const handleProfilePicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
