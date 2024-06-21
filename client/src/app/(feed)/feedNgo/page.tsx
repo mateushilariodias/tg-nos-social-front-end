@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { IPost } from "@/interfaces";
 import { makeRequest } from "../../../../axios";
@@ -9,8 +8,6 @@ import PostCreation from "@/components/feed/PostCreation";
 import Feed from "@/components/feed/Feed";
 
 function FeedNgo() {
-
-    const router = useRouter();
 
     const { data, error, isSuccess, isError } = useQuery({
         queryKey: ["refresh"],
