@@ -5,9 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { IPost } from "@/interfaces";
 import { makeRequest } from "../../../../axios";
 import HeaderNgo from "@/components/feed/HeaderNgo";
-import PostCreation from "@/components/feed/postCreation";
+import PostCreation from "@/components/feed/PostCreation";
 import Feed from "@/components/feed/Feed";
-
 
 function FeedNgo() {
 
