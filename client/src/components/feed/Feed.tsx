@@ -3,7 +3,7 @@
 import Post from "./Post";
 import { IPost } from "@/interfaces";
 
-function FeedMain(props: { post: IPost[] | undefined }) {
+function Feed(props: { post: IPost[] | undefined }) {
 
     return (
         <section className="w-full flex min-h-screen flex-col items-center gap-5">
@@ -15,4 +15,4 @@ function FeedMain(props: { post: IPost[] | undefined }) {
         </section>
     )
 }
-export default FeedMain;
+export default Feed;
