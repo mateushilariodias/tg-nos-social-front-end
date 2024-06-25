@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { FiAlignJustify } from "react-icons/fi";
-import { FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -20,20 +19,21 @@ function Header() {
                 </Link>
             </div>
             <div className="flex lg:hidden pr-4">
-                <FiAlignJustify onClick={() => setShowMobileMenu(true)} />
+                <FaBars onClick={() => setShowMobileMenu(true)} className="text-2xl text-sky-600 cursor-pointer" />
             </div>
 
             {showMobileMenu && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-3/4 max-w-sm text-center">
-                        <button className="absolute top-4 right-4 text-gray-600" onClick={() => setShowMobileMenu(false)}>
-                            <FaTimes size={20} />
-                        </button>
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-start pt-5 text-gray-600">
+                    <div className="bg-white p-4 rounded-md w-11/12 max-w-sm mx-auto">
+                        <div className="flex justify-between items-center mb-4">
+                            <span className="font-bold text-xl">Menu</span>
+                            <FaTimes onClick={() => setShowMobileMenu(false)} className="text-2xl text-sky-600 cursor-pointer" />
+                        </div>
                         <div className="flex flex-col gap-4">
-                            <Link href="/loginUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white rounded-lg">
+                            <Link href="/loginUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white text-center rounded-lg" onClick={() => setShowMobileMenu(false)}>
                                 <strong>Entrar como usuário</strong>
                             </Link>
-                            <Link href="/registerUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white rounded-lg">
+                            <Link href="/registerUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white text-center rounded-lg" onClick={() => setShowMobileMenu(false)}>
                                 <strong>Cadastrar-se como usuário</strong>
                             </Link>
                         </div>

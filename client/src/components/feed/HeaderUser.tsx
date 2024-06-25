@@ -26,7 +26,7 @@ function Header() {
     }
 
     return (
-        <header className="fixed z-10 w-full bg-white flex justify-between items-center py-4 px-4 md:px-10 lg:px-20 shadow-sm">
+        <header className="fixed z-10 w-full bg-white flex justify-between items-center py-4 px-4 md:px-10 lg:px-40 shadow-sm">
             <Link href="/homepage" className="font-bold text-sky-600 text-2xl">Nós Social</Link>
             <div className="hidden md:flex bg-zinc-100 items-center text-gray-600 py-1 px-3 rounded-full relative">
                 <input className="bg-zinc-100 focus-visible:outline-none py-2 px-4" type="text" name="search" id="search" placeholder="Pesquisar" value={search ? search : ""} onChange={(e) => setSearch(e.target.value)} />
@@ -44,10 +44,12 @@ function Header() {
                     })}
                 </div>
             )}
-            <div className="hidden md:flex gap-5 items-center text-gray-600">
-                <Link href="/registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
+            <div className="hidden md:flex">
+            <Link href="/registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
                     <strong>Cadastrar ONG</strong>
                 </Link>
+            </div>
+            <div className="hidden md:flex gap-5 items-center text-gray-600">
                 <div className="relative" onMouseLeave={() => setShowMenu(false)}>
                     <button className="flex gap-2 items-center" onClick={() => setShowMenu(!showMenu)}>
                         <img className="w-8 h-8 rounded-full" src={user ? user.userImg : "https://img.freepik.com/free-icon/user_318-159711.jpg"} alt="Imagem do perfil" />
