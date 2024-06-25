@@ -21,7 +21,6 @@ function Header() {
             <div className="flex lg:hidden pr-4">
                 <FaBars onClick={() => setShowMobileMenu(true)} className="text-2xl text-sky-600 cursor-pointer" />
             </div>
-
             {showMobileMenu && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-start pt-5 text-gray-600">
                     <div className="bg-white p-4 rounded-md w-11/12 max-w-sm mx-auto">

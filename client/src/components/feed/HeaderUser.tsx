@@ -3,13 +3,14 @@ import { useContext, useState } from "react";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { UserContext } from "@/context/userContext";
-import { IUser } from "@/interfaces";
+import { INgo, IUser } from "@/interfaces";
 import { makeRequest } from "../../../axios";
 
 function Header() {
     const { user, setUser } = useContext(UserContext);
     const [showMenu, setShowMenu] = useState(false);
     const [search, setSearch] = useState<string | null>(null);
+    const [searchResults, setSearchResults] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [showSearchModal, setShowSearchModal] = useState(false);
 
@@ -27,21 +28,22 @@ function Header() {
 
     return (
         <header className="fixed z-10 w-full bg-white flex justify-between items-center py-4 px-4 md:px-10 lg:px-40 shadow-sm">
-            <Link href="/homepage" className="font-bold text-sky-600 text-2xl">Nós Social</Link>
+            <Link href="/" className="font-bold text-sky-600 text-2xl">Nós Social</Link>
             <div className="hidden md:flex bg-zinc-100 items-center text-gray-600 py-1 px-3 rounded-full relative">
                 <input className="bg-zinc-100 focus-visible:outline-none py-2 px-4" type="text" name="search" id="search" placeholder="Pesquisar" value={search ? search : ""} onChange={(e) => setSearch(e.target.value)} />
                 <FaSearch />
             </div>
-            {search && (
+            {search && searchResults && (
                 <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-0 left-0 top-[100%] z-20">
-                    {data?.map((users: IUser, id: number) => {
+                    {data?.map((ngos: INgo, id: number) => {
                         return (
-                            <Link href={`/profile?id=${users.id}`} key={id} className="flex items-center gap-2" onClick={() => setSearch(null)}>
-                                <img src={users.userImg ? users.userImg : "https://img.freepik.com/free-icon/user_318-159711.jpg"} alt="Imagem do perfil" className="w-8 h-8 rounded-full" />
-                                <span className="font-bold">{users.userName}</span>
+                            <Link href={`/profile?id=${ngos.id}`} key={id} className="flex items-center gap-2" onClick={() => (setSearch(null), setSearchResults(false))}>
+                                <img src={ngos.imageNgo ? ngos.imageNgo : "https://img.freepik.com/free-icon/user_318-159711.jpg"} alt="Imagem do perfil" className="w-8 h-8 rounded-full" />
+                                <span className="font-bold">{ngos.pageName}</span>
                             </Link>
                         );
                     })}
+                    <Link href={`/search?params=${search}`} className="font-semibold border-t border-zinc-300 text-center pt-2" onClick={() => (setSearch(null), setSearchResults(false))}>Ver todos os resultados.</Link>
                 </div>
             )}
             <div className="hidden md:flex">
