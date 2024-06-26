@@ -8,13 +8,13 @@ function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     return (
-        <header className="fixed z-10 w-full bg-white flex justify-between items-center py-3 px-4 lg:px-40 shadow-sm">
-            <Link className="font-bold text-sky-600 text-3xl" href='/'>Nós Social</Link>
+        <header className="fixed z-10 w-full bg-white flex justify-between items-center p-4 lg:px-40 shadow-sm">
+            <Link className="font-bold text-sky-600 text-3xl lg:text-4xl" href='/'>Nós Social</Link>
             <div className="hidden lg:flex lg:gap-5 items-center text-gray-600">
-                <Link href="/loginUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white rounded-lg">
+                <Link href="/loginUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white text-lg rounded-lg">
                     <strong>Entrar como usuário</strong>
                 </Link>
-                <Link href="/registerUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white rounded-lg">
+                <Link href="/registerUser" className="bg-blue-600 hover:bg-blue-800 py-3 px-5 font-bold text-white text-lg rounded-lg">
                     <strong>Cadastrar-se como usuário</strong>
                 </Link>
             </div>
