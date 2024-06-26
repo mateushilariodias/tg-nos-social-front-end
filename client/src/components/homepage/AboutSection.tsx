@@ -1,3 +1,5 @@
+'use client'
+
 import AboutSectionRender from "./AboutSectionRender";
 
 function AboutSection() {
