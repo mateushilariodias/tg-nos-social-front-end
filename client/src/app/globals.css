@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper-component-wrapper .swiper-slide {
+    @apply h-auto;
+}
+
+.bullets .swiper-pagination-bullet {
+    @apply lg:hidden;
+}
+
+.bullets .swiper-pagination-bullet-active {
+    @apply relative bg-blue-800 w-4 h-2;
+}
+
+.swiper-wrapper .swiper-slide {
+    @apply h-auto;
+}
+
+.CardsAboutSection .swiper-pagination {
+    width: 100%;
+    bottom: 50%;
+}
