@@ -1,5 +1,8 @@
 'use client'
 
+import { DataFaqSection } from "@/data/homepage/FaqSection";
+import FaqRender from "./FaqRender";
+
 export default function FaqSection() {
     return (
         <section className="w-full bg-gray-900 pb-12">
@@ -11,6 +14,9 @@ export default function FaqSection() {
                     <strong>Nota Importante:</strong> Gostaríamos de ressaltar que muitas funcionalidades ainda não estarão disponíveis, pois este projeto está em fase de teste para verificar sua viabilidade prática, apesar de já ter se demonstrado viável em teoria.
                 </p>
             </div>
+            <article className="py-5 px-4 lg:px-4">
+                <FaqRender data={DataFaqSection} />
+            </article>
         </section>
     );
 }
