@@ -1,0 +1,16 @@
+'use client'
+
+export default function FaqSection() {
+    return (
+        <section className="w-full bg-gray-900 pb-12">
+            <div className="w-full lg:max-w-4xl lg:mx-auto px-3 lg:px-0">
+                <h2 className="font-bold text-center text-white text-3xl pt-12 pb-6">
+                    FAQ
+                </h2>
+                <p className="text-center text-white text-xl">
+                    <strong>Nota Importante:</strong> Gostaríamos de ressaltar que muitas funcionalidades ainda não estarão disponíveis, pois este projeto está em fase de teste para verificar sua viabilidade prática, apesar de já ter se demonstrado viável em teoria.
+                </p>
+            </div>
+        </section>
+    );
+}

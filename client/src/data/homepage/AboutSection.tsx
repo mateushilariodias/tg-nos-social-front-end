@@ -11,7 +11,7 @@ export const DataAboutSection:IDataAboutSection[] = [{
 },{
     id: 2,
     title:'Justificativa do Projeto',
-    content:'A realização deste projeto é fundamentada nas necessidades identificadas após um processo de pesquisa e interação com diversos stakeholders, incluindo gerentes, membros de ONG e candidatos a voluntariado. Nossa pesquisa revela uma série de desafios enfrentados pelas pequenas ONGs. O envolvimento de múltiplos stakeholders ajuda a identificar esses desafios e a desenvolver um projeto que visa abordar o principal deles.'
+    content:'A realização deste projeto é fundamentada nas necessidades identificadas após um processo de pesquisa e interação com diversos stakeholders, incluindo gerentes, membros de ONG e candidatos a voluntariado. Nossa pesquisa revela uma série de desafios enfrentados pelas pequenas ONG. O envolvimento de múltiplos stakeholders ajuda a identificar esses desafios e a desenvolver um projeto que visa abordar o principal deles.'
 },{
     id: 3,
     title:'Desafios das ONG',
@@ -28,4 +28,4 @@ export const DataAboutSection:IDataAboutSection[] = [{
     id: 6,
     title:'Nosso Propósito',
     content:'O objetivo geral deste projeto é a criação de um front-end de um sistema disponível em formato web, mobile e desktop, com o propósito de oferecer uma solução que eleve a visibilidade das Organizações Não Governamentais (ONG) e das atividades que realizam.'
-}]
+},]
