@@ -1,5 +1,6 @@
 import Footer from "@/components/common/Footer";
 import AboutSection from "@/components/homepage/AboutSection";
+import CtaSection from "@/components/homepage/CtaSection";
 import FaqSection from "@/components/homepage/FaqSection";
 import Header from "@/components/homepage/header";
 import HeroSection from "@/components/homepage/HeroSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <AboutSection/>
       <TestimonialsSection/>
       <FaqSection/>
+      <CtaSection/>
       <Footer/>
     </main>
   )
