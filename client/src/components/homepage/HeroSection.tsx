@@ -3,7 +3,7 @@ import Link from "next/link";
 function HeroSection() {
 
     return (
-        <section className="lg:flex pt-24 pb-16 px-4 lg:pt-48 lg:pb-36 lg:px-40 bg-blue-800 text-white">
+        <section className="lg:flex pt-24 pb-10 px-4 lg:pt-48 lg:pb-36 lg:px-40 bg-blue-800 text-white">
             <div>
                 <h1 className="font-bold text-2xl lg:text-4xl pb-2">Bem-vindo(a) a Nós Social - São Paulo!</h1>
                 <h2 className="font-medium text-xl lg:text-2xl pb-4 lg:pb-10">Eu + Você = Nós pela sociedade</h2>

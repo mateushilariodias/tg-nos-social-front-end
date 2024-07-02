@@ -58,11 +58,11 @@ function Header() {
                         <span className="font-bold">{user?.userName}</span>
                     </button>
                     {showMenu && (
-                        <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px] z-20">
+                        <nav className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px] z-20">
                             <Link href="/userConfiguration" className="border-b">Configurações do perfil</Link>
                             <Link href="/feedNgo" className="border-b">Entrar como ONG</Link>
                             <Link href="">Logout</Link>
-                        </div>
+                        </nav>
                     )}
                 </div>
             </div>
@@ -97,14 +97,14 @@ function Header() {
                             <span className="font-bold text-xl">Menu</span>
                             <FaTimes onClick={() => setShowMobileMenu(false)} className="text-2xl text-sky-600 cursor-pointer" />
                         </div>
-                        <div className="flex flex-col gap-4">
+                        <nav className="flex flex-col gap-4">
                             <Link href="/registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg text-center" onClick={() => setShowMobileMenu(false)}>
                                 <strong>Cadastrar ONG</strong>
                             </Link>
                             <Link href="/userConfiguration" className="border-b" onClick={() => setShowMobileMenu(false)}>Configurações do perfil</Link>
                             <Link href="/feedNgo" className="border-b" onClick={() => setShowMobileMenu(false)}>Entrar como ONG</Link>
                             <Link href="" onClick={() => setShowMobileMenu(false)}>Logout</Link>
-                        </div>
+                        </nav>
                     </div>
                 </div>
             )}

@@ -68,11 +68,11 @@ function Header() {
                         <span className="font-bold">{ngo?.pageName}</span>
                     </button>
                     {showMenu && (
-                        <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px] z-20">
+                        <nav className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px] z-20">
                             <Link href="/ngoConfiguration" className="border-b">Perfil da ONG</Link>
                             <Link href="/feedUser" className="border-b">Entrar como usuário comum</Link>
                             <Link href="" onClick={() => mutation.mutate()}>Logout</Link>
-                        </div>
+                        </nav>
                     )}
                 </div>
             </div>
@@ -107,11 +107,11 @@ function Header() {
                             <span className="font-bold text-xl">Menu</span>
                             <FaTimes onClick={() => setShowMobileMenu(false)} className="text-2xl text-sky-600 cursor-pointer" />
                         </div>
-                        <div className="flex flex-col gap-4">
+                        <nav className="flex flex-col gap-4">
                             <Link href="/ngoConfiguration" className="border-b" onClick={() => setShowMobileMenu(false)}>Perfil da ONG</Link>
                             <Link href="/feedUser" className="border-b" onClick={() => setShowMobileMenu(false)}>Entrar como usuário comum</Link>
                             <Link href="" onClick={() => { mutation.mutate(); setShowMobileMenu(false); }}>Logout</Link>
-                        </div>
+                        </nav>
                     </div>
                 </div>
             )}
