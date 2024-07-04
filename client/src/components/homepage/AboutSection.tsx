@@ -6,9 +6,12 @@ import AboutSectionRender from "./AboutSectionRender";
 export default function AboutSection() {
     return (
         <section className="w-full bg-gray-50 text-gray-900 pb-12">
-            <h2 className="font-bold text-center text-3xl pt-12 pb-6">
+            <h2 className="font-bold text-center text-3xl pt-12 pb-4">
                 Um pouco sobre <br /> a Nós Social - São Paulo
             </h2>
+            <p className="text-center text-xl pb-6">
+                Conheça um pouco sobre a proposta do projeto de forma introdutória.
+            </p>
             <article className="CardsAboutSection block lg:hidden w-full lg:overflow-hidden relative px-4">
                 <AboutSectionRender data={DataAboutSection} />
             </article>

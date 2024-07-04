@@ -14,7 +14,7 @@ export default function CtaSection() {
                 </p>
             </div>
             <article className="flex flex-col lg:flex-row gap-3 max-w-4xl mx-auto p-4 lg:py-8 lg:px-0 ">
-                <div className="bg-gray-900 text-white w-full p-3">
+                <div className="bg-white text-gray-900 w-full p-3">
                     <strong className="text-xl">Explore Iniciativas Inspiradoras:</strong><br />
                     <span className="text-lg">Conheça projetos impactantes e as histórias por trás deles.</span>
                 </div>
@@ -22,18 +22,21 @@ export default function CtaSection() {
                     <strong className="text-xl">Conecte-se com ONGs:</strong><br />
                     <span className="text-lg">Encontre e entre em contato com organizações que compartilham seus valores.</span>
                 </div>
-                <div className="bg-gray-900 text-white w-full p-3">
+                <div className="bg-white text-gray-900 w-full p-3">
                     <strong className="text-xl">Faça a Diferença:</strong><br />
                     <span className="text-lg">Contribua com seu tempo, habilidades ou doações para apoiar causas importantes.</span>
                 </div>
             </article>
-            <div className="w-full lg:max-w-4xl lg:mx-auto px-4 lg:px-0">
-                <p className="text-left text-white text-xl pb-8">
-                    Não perca a oportunidade de fazer parte de algo maior. Junte-se a nós e ajude a criar um impacto positivo no mundo!
-                </p>
-                <Link href="/registerUser" className="bg-white hover:bg-slate-100 lg:mb-0 py-4 px-6 font-bold text-blue-800 rounded-lg text-sm lg:text-lg uppercase text-center">
-                    <strong>Cadastrar-se como usuário</strong>
-                </Link>
+            <div className="w-full flex flex-row lg:max-w-4xl lg:mx-auto px-4 lg:px-0">
+                <div className='h-auto w-2 bg-gray-900 mt-4 mr-5'></div>
+                <div>
+                    <p className="text-left text-white text-xl pb-8">
+                        Não perca a oportunidade de fazer parte de algo maior. Junte-se a nós e ajude a criar um impacto positivo no mundo!
+                    </p>
+                    <Link href="/registerUser" className="bg-white hover:bg-slate-100 lg:mb-0 py-4 px-6 font-bold text-blue-800 rounded-lg text-sm lg:text-lg uppercase text-center">
+                        <strong>Cadastrar-se como usuário</strong>
+                    </Link>
+                </div>
             </div>
         </section>
     );
