@@ -5,8 +5,8 @@ import AboutSectionRender from "./AboutSectionRender";
 
 export default function AboutSection() {
     return (
-        <section className="w-full bg-gray-50 text-gray-900 pb-12">
-            <h2 className="font-bold text-center text-3xl pt-12 pb-4">
+        <section id="aboutSection" className="w-full bg-gray-50 text-gray-900 pb-16 lg:pb-20">
+            <h2 className="font-bold text-center text-3xl pt-16 lg:pt-20 pb-4">
                 Um pouco sobre <br /> a Nós Social - São Paulo
             </h2>
             <p className="text-center text-xl pb-6">

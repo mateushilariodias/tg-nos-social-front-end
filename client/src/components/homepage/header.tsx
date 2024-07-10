@@ -22,8 +22,8 @@ function Header() {
                 <FaBars onClick={() => setShowMobileMenu(true)} className="text-2xl text-sky-600 cursor-pointer" />
             </div>
             {showMobileMenu && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-start pt-5 text-gray-600">
-                    <div className="bg-white p-4 rounded-md w-11/12 max-w-sm mx-auto">
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-30 flex justify-center items-start text-gray-600">
+                    <div className="bg-white p-4 w-full max-w-sm mx-auto">
                         <div className="flex justify-between items-center mb-4">
                             <span className="font-bold text-xl">Menu</span>
                             <FaTimes onClick={() => setShowMobileMenu(false)} className="text-2xl text-sky-600 cursor-pointer" />
