@@ -9,9 +9,12 @@ export default function AboutSection() {
             <h2 className="font-bold text-center text-3xl pt-16 lg:pt-20 pb-4">
                 Um pouco sobre <br /> a Nós Social - São Paulo
             </h2>
-            <p className="text-center text-xl pb-6">
-                Conheça um pouco sobre a proposta do projeto de forma introdutória.
-            </p>
+            <div className="xl:max-w-4xl mx-auto px-4">
+                <p className="text-center text-xl pb-6">Nosso objetivo é oferecer um espaço onde as ONG possam se cadastrar e compartilhar suas atividades beneficentes com o público. Aqui, você encontrará uma variedade de projetos e iniciativas realizadas por ONG locais, desde campanhas de arrecadação até eventos de conscientização.</p>
+                <p className="text-center text-xl pb-6">Ao explorar nossa plataforma, você terá a oportunidade de se envolver com a comunidade e fazer a diferença de maneira significativa. Encontre ONG que estejam alinhadas com seus interesses e valores, descubra oportunidades de voluntariado e apoie causas que você se importa.</p>
+                <p className="text-center text-xl pb-6">Junte-se a nós nesta jornada de solidariedade e impacto social. Vamos trabalhar juntos para construir um futuro melhor para todos.</p>
+                <p className="text-center text-xl pb-6">Conheça um pouco mais sobre a proposta do projeto de forma introdutória e transparente.</p>
+            </div>
             <article className="CardsAboutSection block lg:hidden w-full lg:overflow-hidden relative px-4">
                 <AboutSectionRender data={DataAboutSection} />
             </article>
