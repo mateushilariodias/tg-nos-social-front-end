@@ -149,9 +149,9 @@ function NgoConfiguration({ searchParams }: { searchParams: { id: string } }) {
                         </div>
                     </div>
                 }
-                <div className="w-full">
-                    <Feed post={postQuery.data}></Feed>
-                </div>
+                {/* <div className="w-full">
+                <Feed posts={postQuery.data}></Feed>
+                </div> */}
             </div>
         </div>
     );
