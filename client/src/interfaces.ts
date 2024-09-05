@@ -4,6 +4,8 @@ export interface IPost {
     author: string;
     description: string;
     image: string;
+    video: string;
+    file: string;
     createdPost: string;
     ngoId: number;
 }
