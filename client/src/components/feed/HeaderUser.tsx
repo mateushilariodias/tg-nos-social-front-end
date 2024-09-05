@@ -4,7 +4,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import { UserContext } from "@/context/userContext";
 import { INgo, IUser } from "@/interfaces";
-import { makeRequest } from "../../../axios";
+import { api } from "@/services/api";
 
 function Header() {
     const { user, setUser } = useContext(UserContext);
@@ -16,7 +16,7 @@ function Header() {
 
     const { data, error } = useQuery({
         queryKey: ['search'],
-        queryFn: () => makeRequest.get(`search/search-users?params=${search}`).then((res) => {
+        queryFn: () => api.get(`search/search-users?params=${search}`).then((res) => {
             return res.data;
         }),
         enabled: !!search
@@ -47,7 +47,7 @@ function Header() {
                 </div>
             )}
             <div className="hidden md:flex">
-            <Link href="/registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
+                <Link href="/registerNgo" className="bg-blue-600 hover:bg-blue-800 py-3 px-6 font-bold text-white rounded-lg">
                     <strong>Cadastrar ONG</strong>
                 </Link>
             </div>
@@ -61,7 +61,7 @@ function Header() {
                         <nav className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t whitespace-nowrap right-[-8px] z-20">
                             <Link href="/userConfiguration" className="border-b">Configurações do perfil</Link>
                             <Link href="/feedNgo" className="border-b">Entrar como ONG</Link>
-                            <Link href="">Logout</Link>
+                            <Link href="" onClick={() => setUser(null)}>Logout</Link>
                         </nav>
                     )}
                 </div>
@@ -103,7 +103,7 @@ function Header() {
                             </Link>
                             <Link href="/userConfiguration" className="border-b" onClick={() => setShowMobileMenu(false)}>Configurações do perfil</Link>
                             <Link href="/feedNgo" className="border-b" onClick={() => setShowMobileMenu(false)}>Entrar como ONG</Link>
-                            <Link href="" onClick={() => setShowMobileMenu(false)}>Logout</Link>
+                            <Link href="" onClick={() => (setUser(null), setShowMobileMenu(false))}>Logout</Link>
                         </nav>
                     </div>
                 </div>

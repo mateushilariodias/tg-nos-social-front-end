@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
-
+    
     return (
         <header className="fixed z-50 w-full bg-white flex justify-between items-center p-4 lg:px-16 xl:px-40 shadow-sm">
             <Link className="font-bold text-sky-600 text-3xl lg:text-4xl" href='/'>Nós Social</Link>
