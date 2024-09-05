@@ -1,16 +1,16 @@
 'use client'
 
 import { useQuery } from "@tanstack/react-query"
-import { makeRequest } from "../../../axios"
 import { IPost, IUser } from "@/interfaces"
 import Link from "next/link"
 import Post from "@/components/feed/Post"
+import { api } from "@/services/api"
 
 function Search({ searchParams }: { searchParams: { params: string } }) {
 
     const users = useQuery({
         queryKey: ['searchUsers', searchParams],
-        queryFn: () => makeRequest.get(`search/search-users?params=${searchParams.params}`).then((res) => {
+        queryFn: () => api.get(`search/search-users?params=${searchParams.params}`).then((res) => {
             return res.data
         }),
         enabled: !!searchParams.params,
@@ -22,7 +22,7 @@ function Search({ searchParams }: { searchParams: { params: string } }) {
 
     const posts = useQuery({
         queryKey: ['searchPosts', searchParams],
-        queryFn: () => makeRequest.get(`search/search-posts?params=${searchParams.params}`).then((res) => {
+        queryFn: () => api.get(`search/search-posts?params=${searchParams.params}`).then((res) => {
             return res.data
         }),
         enabled: !!searchParams.params,
