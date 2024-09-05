@@ -7,7 +7,6 @@ export interface IPost {
     createdPost: string;
     ngoId: number;
 }
-
 export interface ILike {
     id: number;
     userName: string;
@@ -17,7 +16,7 @@ export interface ILike {
 
 export interface IComment {
     id: number;
-    comment: number;
+    commentContent: string;
     userName: string;
     userImg: string;
     commentUserId: number;

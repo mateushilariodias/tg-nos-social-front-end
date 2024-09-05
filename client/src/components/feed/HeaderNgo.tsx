@@ -5,7 +5,7 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { INgo } from "@/interfaces";
 import { NgoContext } from "@/context/ngoContext";
-import { makeRequest } from "../../../axios";
+import { api } from "@/services/api";
 
 function Header() {
     const { ngo, setNgo } = useContext(NgoContext);
@@ -18,7 +18,7 @@ function Header() {
     
     const mutation = useMutation({
         mutationFn: async () => {
-            return await makeRequest.post("auth/logout").then((res) => {
+            return await api.post("auth/logout").then((res) => {
                 res.data;
             });
         },
@@ -31,7 +31,7 @@ function Header() {
 
     const { data, error } = useQuery({
         queryKey: ['search'],
-        queryFn: () => makeRequest.get(`search/search-users?params=${search}`).then((res) => {
+        queryFn: () => api.get(`search/search-users?params=${search}`).then((res) => {
             return res.data;
         }),
         enabled: !!search

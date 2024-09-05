@@ -1,20 +1,19 @@
-'use client'
+'use client';
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import { TbPhoto } from "react-icons/tb";
 import { NgoContext } from "@/context/ngoContext";
-import { makeRequest } from "../../../axios";
+import { api } from "@/services/api";
 
 function PostCreation() {
+    const { ngo } = useContext(NgoContext);
+    const [description, setDescription] = useState("");
+    const [imageUnification, setImageUnification] = useState("");
+    const [image, setImage] = useState<File | null>(null);
 
-    const { ngo } = useContext(NgoContext)
-    const [description, setDescription] = useState("")
-    const [imageUnification, setImageUnification] = useState("")
-    const [image, setImage] = useState<File | null>(null)
-
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         if (image) {
@@ -23,35 +22,37 @@ function PostCreation() {
     }, [image]);
 
     const mutation = useMutation({
-        mutationFn: async (newPost: {}) => {
-            await makeRequest.post("post/", newPost).then((res) => {
+        mutationFn: async (newPost: { description: string, image: string, ngoId: string | undefined }) => {
+            await api.post("post/", newPost).then((res) => {
                 return res.data;
-            })
+            });
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['posts'] })
+            queryClient.invalidateQueries({ queryKey: ['posts'] });
         },
-    })
+    });
 
-    const upload = async () => {
+    const upload = async (): Promise<string> => {
         try {
-            const formDara = new FormData
-            image && formDara.append('file', image)
-            const res = await makeRequest.post('upload/', formDara)
-            return res.data
+            const formData = new FormData();
+            if (image) formData.append('file', image);
+            const res = await api.post('upload/', formData);  // Alterado de makeRequest para api
+            return res.data.url; // Supondo que o backend retorna a URL da imagem como `url`
         } catch (error) {
-            console.log(error)
+            console.error('Erro ao fazer upload da imagem:', error);
+            return '';
         }
     }
 
     const sharePost = async () => {
-        let imageUrl = ''
+        let imageUrl = '';
         if (image) {
-            imageUrl = await upload()
+            imageUrl = await upload();
         }
-        mutation.mutate({ description, image: imageUrl, ngoId: ngo?.id })
-        setDescription('')
-        setImage(null)
+        mutation.mutate({ description, image: imageUrl, ngoId: ngo?.id });
+        setDescription('');
+        setImage(null);
+        setImageUnification(''); // Resetar a visualização da imagem
     }
 
     return (
@@ -61,7 +62,15 @@ function PostCreation() {
                 <img className="w-10 h-10 rounded-full" src={ngo?.imageNgo ? ngo.imageNgo : "https://img.freepik.com/free-icon/user_318-159711.jpg"} alt="Imagem do perfil" />
                 <span className="font-bold">{ngo?.pageName}</span>
                 <div className="w-full bg-zinc-100 flex items-center text-gray-600 px-3 py-1 rounded-full">
-                    <input type="text" name="comment" id="comment" placeholder={`Qual trabalho você deseja compartilhar?`} value={description} onChange={(e) => setDescription(e.target.value)} className="bg-zinc-100 w-full focus-visible:outline-none " />
+                    <input 
+                        type="text" 
+                        name="comment" 
+                        id="comment" 
+                        placeholder={`Qual trabalho você deseja compartilhar?`} 
+                        value={description} 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        className="bg-zinc-100 w-full focus-visible:outline-none" 
+                    />
                     <button onClick={() => sharePost()}>
                         <FaPaperPlane />
                     </button>
@@ -74,6 +83,7 @@ function PostCreation() {
                 </label>
             </div>
         </div>
-    )
+    );
 }
+
 export default PostCreation;
