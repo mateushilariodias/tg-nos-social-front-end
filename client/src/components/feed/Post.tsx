@@ -29,37 +29,60 @@ function Post({ post }: PostProps) {
       if (id) {
         try {
           const postComments = await getComments(id);
-          setComments(postComments);
+          setComments((prevComments) => {
+            // Só atualiza se os comentários forem diferentes
+            if (JSON.stringify(prevComments) !== JSON.stringify(postComments)) {
+              return postComments;
+            }
+            return prevComments;
+          });
         } catch (error) {
           console.error('Error fetching comments:', error);
         }
       }
     };
-
+  
     const fetchLikes = async () => {
       if (id) {
         try {
-          const postLikes = await getLikes(id);
-          setLikes(postLikes);
-          setLiked(postLikes.some(like => like.likeUserId === id));
+          const postLikes: ILike[] = await getLikes(id);
+          setLikes((prevLikes) => {
+            // Só atualiza se os likes forem diferentes
+            if (JSON.stringify(prevLikes) !== JSON.stringify(postLikes)) {
+              return postLikes;
+            }
+            return prevLikes;
+          });
+          setLiked(postLikes.some((like: ILike) => like.likeUserId === String(id)));
         } catch (error) {
           console.error('Error fetching likes:', error);
         }
       }
     };
-
+  
+    // Invocar as funções apenas uma vez, quando o post id mudar
     fetchComments();
     fetchLikes();
-  }, [id]);
+  }, [id, getComments, getLikes]); // Apenas 'id', 'getComments', e 'getLikes' como dependências  
 
   const handleLike = async () => {
     if (id) {
       try {
         await toggleLike(id, liked);
         setLiked(!liked);
-        setLikes(prevLikes =>
-          liked ? prevLikes.filter(like => like.likeUserId !== id) : [...prevLikes, { id: String(Math.random()), likeUserId: id, userName: "Você" }]
-        );
+        setLikes((prevLikes: ILike[]) => {
+          if (liked) {
+            return prevLikes.filter(like => like.likeUserId !== String(id));
+          } else {
+            const newLike: ILike = {
+              id: Math.floor(Math.random() * 1000000),
+              userName: "Você",
+              likeUserId: String(id),
+              postId: id
+            };
+            return [...prevLikes, newLike];
+          }
+        });
       } catch (error) {
         console.error('Error toggling like:', error);
       }
@@ -69,8 +92,17 @@ function Post({ post }: PostProps) {
   const handleComment = async () => {
     if (id && commentText) {
       try {
-        const newComment = await getComments(id);
-        setComments([...comments, newComment]);
+        const newComment: IComment = {
+          id: Math.floor(Math.random() * 1000000),
+          commentContent: commentText,
+          userName: "Você",
+          userImg: "path/to/user/image",
+          commentUserId: 1,
+          postId: id,
+          createdComment: new Date().toISOString()
+        };
+        
+        setComments(prevComments => [...prevComments, newComment]);
         setCommentText('');
       } catch (error) {
         console.error('Error posting comment:', error);

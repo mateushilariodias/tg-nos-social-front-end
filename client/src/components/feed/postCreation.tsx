@@ -7,6 +7,13 @@ import { TbPhoto } from "react-icons/tb";
 import { NgoContext } from "@/context/ngoContext";
 import { api } from "@/services/api";
 
+// Define a interface para o post
+interface NewPost {
+    description: string;
+    image: string;
+    ngoId: number;
+}
+
 function PostCreation() {
     const { ngo } = useContext(NgoContext);
     const [description, setDescription] = useState("");
@@ -22,10 +29,9 @@ function PostCreation() {
     }, [image]);
 
     const mutation = useMutation({
-        mutationFn: async (newPost: { description: string, image: string, ngoId: string | undefined }) => {
-            await api.post("post/", newPost).then((res) => {
-                return res.data;
-            });
+        mutationFn: async (newPost: NewPost) => {
+            const response = await api.post("post/", newPost);
+            return response.data;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['posts'] });
@@ -36,8 +42,8 @@ function PostCreation() {
         try {
             const formData = new FormData();
             if (image) formData.append('file', image);
-            const res = await api.post('upload/', formData);  // Alterado de makeRequest para api
-            return res.data.url; // Supondo que o backend retorna a URL da imagem como `url`
+            const res = await api.post('upload/', formData);
+            return res.data.url;
         } catch (error) {
             console.error('Erro ao fazer upload da imagem:', error);
             return '';
@@ -45,41 +51,53 @@ function PostCreation() {
     }
 
     const sharePost = async () => {
+        if (!ngo?.id) {
+            console.error('NGO ID is not available');
+            return;
+        }
+
         let imageUrl = '';
         if (image) {
             imageUrl = await upload();
         }
-        mutation.mutate({ description, image: imageUrl, ngoId: ngo?.id });
+
+        mutation.mutate({ 
+            description, 
+            image: imageUrl, 
+            ngoId: ngo.id  // Now passing a number
+        });
+
         setDescription('');
         setImage(null);
-        setImageUnification(''); // Resetar a visualização da imagem
+        setImageUnification('');
     }
 
     return (
-        <div className="mt-2 lg:mt-8 w-full bg-white rounded-lg pb-4 px-4 lg:p-4 shadow-md flex flex-col gap-3">
-            {image && <img src={imageUnification} alt="Imagem da postagem" />}
-            <div className="flex gap-2 lg:gap-4 pt-6">
-                <img className="w-10 h-10 rounded-full" src={ngo?.imageNgo ? ngo.imageNgo : "https://img.freepik.com/free-icon/user_318-159711.jpg"} alt="Imagem do perfil" />
-                <span className="font-bold">{ngo?.pageName}</span>
-                <div className="w-full bg-zinc-100 flex items-center text-gray-600 px-3 py-1 rounded-full">
-                    <input 
-                        type="text" 
-                        name="comment" 
-                        id="comment" 
-                        placeholder={`Qual trabalho você deseja compartilhar?`} 
-                        value={description} 
-                        onChange={(e) => setDescription(e.target.value)} 
-                        className="bg-zinc-100 w-full focus-visible:outline-none" 
-                    />
-                    <button onClick={() => sharePost()}>
-                        <FaPaperPlane />
-                    </button>
-                </div>
+        <div>
+            {image && <img src={imageUnification} alt="Preview" />}
+            <div>
+                <span>{ngo?.pageName}</span>
+                <textarea
+                    placeholder="O que está acontecendo?"
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                    className="bg-zinc-100 w-full focus-visible:outline-none"
+                />
+                <button onClick={sharePost}>
+                    <FaPaperPlane />
+                    Compartilhar
+                </button>
             </div>
-            <div className="flex justify-around py-4 text-gray-600 border-y">
-                <input className="hidden" type="file" id="image" onChange={(e) => e.target.files && setImage(e.target.files[0])} />
-                <label htmlFor="image" className="flex">
-                    <TbPhoto className="text-2xl" /> Adicionar imagem
+            <div>
+                <input
+                    type="file"
+                    id="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => e.target.files && setImage(e.target.files[0])}
+                />
+                <label htmlFor="file">
+                    <TbPhoto />
+                    <span>Adicionar imagem</span>
                 </label>
             </div>
         </div>

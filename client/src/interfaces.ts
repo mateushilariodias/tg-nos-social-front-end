@@ -12,10 +12,9 @@ export interface IPost {
 export interface ILike {
     id: number;
     userName: string;
-    likeUserId: number;
+    likeUserId: string;
     postId: number
 }
-
 export interface IComment {
     id: number;
     commentContent: string;

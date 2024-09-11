@@ -22,5 +22,19 @@ export function useComments() {
     }
   };
 
-  return { getComments, loading, error };
+  const createComment = async (comment: Omit<IComment, 'id'>): Promise<IComment> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await api.post('/comments', comment);
+      setLoading(false);
+      return response.data;
+    } catch (err) {
+      setError(err as Error);
+      setLoading(false);
+      throw err;
+    }
+  };
+
+  return { getComments, createComment, loading, error };
 }
