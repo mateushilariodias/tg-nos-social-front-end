@@ -1,31 +1,25 @@
 import { useState, useEffect } from 'react';
+import { IPost } from "@/interfaces";
+import data from '../../public/data.json'; // Importando os dados locais
 
-export function useFeed() {
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [likes, setLikes] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+export const useFeed = () => {
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeed = async () => {
-      setLoading(true);
-      setError(null);
+    const fetchPosts = async () => {
       try {
-        const response = await fetch('/api/feed'); // Ajuste para o endpoint correto
-        const data = await response.json();
-        setPosts(data.posts);
-        setComments(data.comments);
-        setLikes(data.likes);
-      } catch (err) {
-        setError(error);
+        // Simulando a busca de dados locais para imitar um fetch
+        setPosts(data.posts); // Certifique-se de que 'data.posts' corresponde à interface IPost[]
+      } catch (error) {
+        console.error('Error fetching posts:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFeed();
+    fetchPosts();
   }, []);
 
-  return { posts, comments, likes, loading, error };
-}
+  return { posts, loading };
+};

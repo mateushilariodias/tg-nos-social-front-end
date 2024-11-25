@@ -4,7 +4,6 @@ import { IPost } from "@/interfaces";
 import HeaderNgo from "@/components/feed/HeaderNgo";
 import PostCreation from "@/components/feed/postCreation";
 import Feed from "@/components/feed/Feed";
-import { api } from "@/services/api";
 import { useEffect, useState } from "react";
 
 function FeedNgo() {
@@ -15,17 +14,20 @@ function FeedNgo() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await api.get("posts");
-                console.log('API Response:', response.data);
-                
-                // Verifique se response.data é um array
-                if (Array.isArray(response.data)) {
-                    setPosts(response.data as IPost[]);
+                // Carregando dados do arquivo JSON local
+                const response = await fetch('/data.json');
+                const data = await response.json();
+
+                console.log('API Response:', data);
+
+                // Verifique se data.posts é um array
+                if (Array.isArray(data.posts)) {
+                    setPosts(data.posts as IPost[]);
                 } else {
-                    console.error('Formato de dados inesperado:', response.data);
+                    console.error('Formato de dados inesperado:', data);
                     setIsError(true);
                 }
-                
+
                 setIsLoading(false);
             } catch (error) {
                 console.error('Erro ao carregar os posts:', error);
@@ -39,8 +41,11 @@ function FeedNgo() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-zinc-100">
             <HeaderNgo />
-            <div className="w-full p-6 lg:px-0 lg:w-2/6 flex flex-col gap-3 lg:py-20">
-            <PostCreation />
+            <div className="px-6 lg:px-0 pt-20 lg:pt-28 lg:pb-10 w-full flex items-center justify-center">
+                <PostCreation />
+            </div>
+            {/* <Search/> */}
+            <div className="w-full p-6 lg:px-0 lg:w-2/6 flex flex-col gap-5 lg:pt-0">
                 {isLoading && <div>Loading...</div>}
                 {isError && <div>Error loading posts</div>}
                 {!isLoading && !isError && posts.length > 0 ? (

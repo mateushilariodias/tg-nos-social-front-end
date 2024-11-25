@@ -3,9 +3,9 @@
         {
             "id": 1,
             "profilePicture": "https://example.com/ngos/ngo1.jpg",
-            "author": "HelpingHands",
-            "description": "Helping to clean the local park",
-            "image": "https://example.com/posts/post1.jpg",
+            "author": "Crianças Felizes",
+            "description": "Aliquam purus nisi, malesuada vel.",
+            "image": "https://media.gettyimages.com/id/1167552352/pt/foto/volunteer-together-pick-up-trash-in-the-park.jpg?s=612x612&w=0&k=20&c=3FkrmzI7tc1U4D06pvYQyfV-bC-hEdFPwnrvtInTIdQ=",
             "createdPost": "2024-08-01T10:00:00Z",
             "ngoId": 101
         },

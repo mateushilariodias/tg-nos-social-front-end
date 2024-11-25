@@ -1,40 +1,38 @@
-import { useState } from 'react';
-import { IComment } from '@/interfaces';
-import { api } from '@/services/api';
+import { useState, useCallback } from 'react';
+import { IComment } from "@/interfaces";
 
-export function useComments() {
+export const useComments = () => {
+  const [comments, setComments] = useState<IComment[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | Error>(null);
 
-  const getComments = async (postId: number): Promise<IComment[]> => {
+  const getComments = useCallback(async (postId: number) => {
     setLoading(true);
-    setError(null);
     try {
-      const response = await api.get(`/comments`, {
-        params: { postId },
+      const response = await fetch('/data.json');
+      const data = await response.json();
+      const postComments = data.comments.filter((comment: IComment) => comment.postId === postId); 
+      // Atualiza apenas se os comentários forem diferentes
+      setComments((prevComments) => {
+        const isSame = JSON.stringify(prevComments) === JSON.stringify(postComments);
+        return isSame ? prevComments : postComments;
       });
-      setLoading(false);
-      return response.data;
-    } catch (err) {
-      setError(err as Error);
-      setLoading(false);
+      return postComments;
+    } catch (error) {
+      console.error('Error loading comments:', error);
       return [];
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []);
 
-  const createComment = async (comment: Omit<IComment, 'id'>): Promise<IComment> => {
-    setLoading(true);
-    setError(null);
+  const createComment = useCallback(async (newComment: IComment) => {
     try {
-      const response = await api.post('/comments', comment);
-      setLoading(false);
-      return response.data;
-    } catch (err) {
-      setError(err as Error);
-      setLoading(false);
-      throw err;
+      setComments((prevComments) => [...prevComments, newComment]);
+      return newComment;
+    } catch (error) {
+      console.error('Error creating comment:', error);
     }
-  };
+  }, []);
 
-  return { getComments, createComment, loading, error };
-}
+  return { comments, getComments, createComment, loading };
+};

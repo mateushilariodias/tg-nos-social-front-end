@@ -7,7 +7,7 @@ import 'moment/locale/pt-br';
 import { useComments } from '@/hooks/useComments';
 import { useLikes } from '@/hooks/useLikes';
 import Comment from './Comment';
-import { FaPaperPlane, FaRegComment, FaThumbsUp, FaShareAlt, FaFlag, FaEllipsisV } from "react-icons/fa";
+import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
 
 interface PostProps {
   post: IPost;
@@ -20,8 +20,7 @@ function Post({ post }: PostProps) {
   const [liked, setLiked] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [showComments, setShowComments] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { getComments } = useComments();
+  const { getComments, createComment } = useComments();
   const { getLikes, toggleLike } = useLikes();
 
   useEffect(() => {
@@ -29,60 +28,38 @@ function Post({ post }: PostProps) {
       if (id) {
         try {
           const postComments = await getComments(id);
-          setComments((prevComments) => {
-            // Só atualiza se os comentários forem diferentes
-            if (JSON.stringify(prevComments) !== JSON.stringify(postComments)) {
-              return postComments;
-            }
-            return prevComments;
-          });
+          setComments(postComments ?? []);
         } catch (error) {
           console.error('Error fetching comments:', error);
         }
       }
     };
-  
+
     const fetchLikes = async () => {
       if (id) {
         try {
           const postLikes: ILike[] = await getLikes(id);
-          setLikes((prevLikes) => {
-            // Só atualiza se os likes forem diferentes
-            if (JSON.stringify(prevLikes) !== JSON.stringify(postLikes)) {
-              return postLikes;
-            }
-            return prevLikes;
-          });
-          setLiked(postLikes.some((like: ILike) => like.likeUserId === String(id)));
+          setLikes(postLikes ?? []);
+          setLiked(postLikes?.some((like: ILike) => like.likeUserId === String(id)) || false);
         } catch (error) {
           console.error('Error fetching likes:', error);
         }
       }
     };
-  
-    // Invocar as funções apenas uma vez, quando o post id mudar
+
     fetchComments();
     fetchLikes();
-  }, [id, getComments, getLikes]); // Apenas 'id', 'getComments', e 'getLikes' como dependências  
+  }, [id, getComments, getLikes]);
 
   const handleLike = async () => {
     if (id) {
       try {
         await toggleLike(id, liked);
         setLiked(!liked);
-        setLikes((prevLikes: ILike[]) => {
-          if (liked) {
-            return prevLikes.filter(like => like.likeUserId !== String(id));
-          } else {
-            const newLike: ILike = {
-              id: Math.floor(Math.random() * 1000000),
-              userName: "Você",
-              likeUserId: String(id),
-              postId: id
-            };
-            return [...prevLikes, newLike];
-          }
-        });
+        setLikes((prevLikes) => liked 
+          ? prevLikes.filter(like => like.likeUserId !== String(id))
+          : [...prevLikes, { id: Date.now(), userName: "Você", likeUserId: String(id), postId: id }]
+        );
       } catch (error) {
         console.error('Error toggling like:', error);
       }
@@ -93,38 +70,25 @@ function Post({ post }: PostProps) {
     if (id && commentText) {
       try {
         const newComment: IComment = {
-          id: Math.floor(Math.random() * 1000000),
+          id: Date.now(),
           commentContent: commentText,
           userName: "Você",
           userImg: "path/to/user/image",
           commentUserId: 1,
           postId: id,
-          createdComment: new Date().toISOString()
+          createdComment: new Date().toISOString(),
         };
-        
-        setComments(prevComments => [...prevComments, newComment]);
+        const savedComment = await createComment(newComment);
+        if (savedComment) {
+          setComments([...comments, savedComment]);
+        } else {
+          console.error('Error: savedComment is undefined');
+        }
         setCommentText('');
       } catch (error) {
         console.error('Error posting comment:', error);
       }
     }
-  };
-
-  const handleShare = () => {
-    const postUrl = `${window.location.origin}/post/${id}`;
-    navigator.clipboard.writeText(postUrl).then(() => {
-      alert('Link da postagem copiado para a área de transferência!');
-    }).catch((error) => {
-      console.error('Erro ao copiar o link:', error);
-    });
-  };
-
-  const handleReport = () => {
-    alert("Postagem reportada!");
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -142,9 +106,6 @@ function Post({ post }: PostProps) {
           <span className="font-semibold">{author || 'Unknown Author'}</span>
           <span className="text-xs">{createdPost ? moment(createdPost).fromNow() : 'Unknown date'}</span>
         </div>
-        <button className="ml-auto md:hidden" onClick={() => setIsModalOpen(true)}>
-          <FaEllipsisV />
-        </button>
       </header>
       <main>
         {description && (
@@ -152,7 +113,6 @@ function Post({ post }: PostProps) {
             <span>{description}</span>
           </div>
         )}
-
         {image && (
           <img
             className="mx-auto"
@@ -163,23 +123,12 @@ function Post({ post }: PostProps) {
             }}
           />
         )}
-        {video && (
-          <video controls className="mx-auto">
-            <source src={video} type="video/mp4" />
-            Seu navegador não suporta a exibição de vídeos.
-          </video>
-        )}
-        {file && (
-          <a href={file} download className="block text-blue-600 text-center mt-4">
-            Baixar arquivo
-          </a>
-        )}
       </main>
       <footer>
         <div className="flex justify-between py-4 border-b">
           <div className="relative" onMouseEnter={() => setShowComments(true)} onMouseLeave={() => setShowComments(false)}>
             {likes.length > 0 && (
-              <>
+              <section>
                 <div className="flex gap-1 items-center">
                   <span className="bg-blue-600 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs">
                     <FaThumbsUp />
@@ -193,7 +142,7 @@ function Post({ post }: PostProps) {
                     ))}
                   </div>
                 )}
-              </>
+              </section>
             )}
           </div>
           <button onClick={() => setShowComments(!showComments)}>
@@ -207,12 +156,6 @@ function Post({ post }: PostProps) {
           <button className="flex items-center gap-1" onClick={() => document.getElementById("comment" + id)?.focus()}>
             <FaRegComment /> Comentar
           </button>
-          <button className="hidden lg:flex items-center gap-1" onClick={handleShare}>
-            <FaShareAlt /> Compartilhar
-          </button>
-          <button className="hidden lg:flex items-center gap-1" onClick={handleReport}>
-            <FaFlag /> Reportar
-          </button>
         </div>
         {showComments && comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
@@ -222,8 +165,8 @@ function Post({ post }: PostProps) {
           <div className="w-full bg-zinc-100 flex items-center text-gray-600 px-3 py-1 rounded-full">
             <input
               type="text"
-              name="comment"
-              id={"comment" + id}
+              name="commentContent"
+              id={"commentContent" + id}
               placeholder="Comente sobre o trabalho"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
@@ -233,26 +176,6 @@ function Post({ post }: PostProps) {
           </div>
         </div>
       </footer>
-
-      {/* Modal para mobile */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          onClick={closeModal} // Fechar ao clicar fora da modal
-        >
-          <div className="bg-white p-6 rounded-lg w-3/4 relative" onClick={(e) => e.stopPropagation()}>
-            <button className="absolute top-2 right-2 text-gray-400" onClick={closeModal}>X</button>
-            <div className="flex flex-col gap-4">
-              <button onClick={handleShare} className="flex items-center gap-1 text-blue-600">
-                <FaShareAlt /> Compartilhar
-              </button>
-              <button onClick={handleReport} className="flex items-center gap-1 text-red-600">
-                <FaFlag /> Reportar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

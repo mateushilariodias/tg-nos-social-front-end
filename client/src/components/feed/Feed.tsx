@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Post from "./Post";
 import { IPost } from "@/interfaces";
 
@@ -9,7 +9,7 @@ interface FeedProps {
 function Feed({ posts }: FeedProps) {
     return (
         <section className="w-full flex min-h-screen flex-col items-center gap-5">
-            <div className="w-full flex flex-col gap-5 items-center pt-12">
+            <div className="w-full flex flex-col gap-5 items-center">
                 {posts.map((post, index) => {
                     return <Post post={post} key={post.id || index} />
                 })}

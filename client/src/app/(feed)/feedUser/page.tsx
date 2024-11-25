@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { IPost } from "@/interfaces";
 import HeaderUser from "@/components/feed/HeaderUser";
 import Feed from "@/components/feed/Feed";
-import { api } from "@/services/api";
+import PostCreation from '@/components/feed/postCreation';
+// import Search from '@/app/search/page';
 
 function FeedUser() {
     const [posts, setPosts] = useState<IPost[]>([]);
@@ -13,14 +14,17 @@ function FeedUser() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await api.get("posts");
-                console.log('API Response:', response.data);
+                // Carregando dados do arquivo JSON local
+                const response = await fetch('/data.json');
+                const data = await response.json();
                 
-                // Verifique se response.data é um array
-                if (Array.isArray(response.data)) {
-                    setPosts(response.data as IPost[]);
+                console.log('API Response:', data);
+
+                // Verifique se data.posts é um array
+                if (Array.isArray(data.posts)) {
+                    setPosts(data.posts as IPost[]);
                 } else {
-                    console.error('Formato de dados inesperado:', response.data);
+                    console.error('Formato de dados inesperado:', data);
                     setIsError(true);
                 }
                 
@@ -37,7 +41,8 @@ function FeedUser() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-zinc-100">
             <HeaderUser />
-            <div className="w-full p-6 lg:px-0 lg:w-2/6 flex flex-col gap-5 lg:py-20">
+            {/* <Search/> */}
+            <div className="w-full p-6 lg:px-0 lg:w-2/6 flex flex-col gap-5 pt-24 lg:pt-28">
                 {isLoading && <div>Loading...</div>}
                 {isError && <div>Error loading posts</div>}
                 {!isLoading && !isError && posts.length > 0 ? (

@@ -1,42 +1,37 @@
-import { useState } from 'react';
-import { ILike } from '@/interfaces';
-import axios from 'axios';
+import { useState, useCallback } from 'react';
+import { ILike } from "@/interfaces";
 
 export const useLikes = () => {
   const [likes, setLikes] = useState<ILike[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
 
-  const getLikes = async (postId: number) => {
+  const getLikes = useCallback(async (postId: number) => {
     try {
-      setLoading(true);
-      const response = await axios.get(`/api/posts/${postId}/likes`);
-      setLikes(response.data);
-      return response.data;
-    } catch (err) {
-      setError(err as Error);
-      console.error('Error fetching likes:', err);
+      const response = await fetch('/data.json');
+      const data = await response.json();
+      const postLikes = data.likes.filter((like: ILike) => like.postId === postId); 
+      // Atualiza apenas se os likes forem diferentes
+      setLikes((prevLikes) => {
+        const isSame = JSON.stringify(prevLikes) === JSON.stringify(postLikes);
+        return isSame ? prevLikes : postLikes;
+      });
+      return postLikes;
+    } catch (error) {
+      console.error('Error loading likes:', error);
       return [];
-    } finally {
-      setLoading(false);
     }
-  };
+  }, []); // `useCallback` garante que a função não será recriada
 
-  const toggleLike = async (postId: number, liked: boolean) => {
+  const toggleLike = useCallback(async (postId: number, liked: boolean) => {
     try {
-      setLoading(true);
-      if (liked) {
-        await axios.delete(`/api/posts/${postId}/likes`);
-      } else {
-        await axios.post(`/api/posts/${postId}/likes`);
-      }
-    } catch (err) {
-      setError(err as Error);
-      console.error('Error toggling like:', err);
-    } finally {
-      setLoading(false);
+      setLikes((prevLikes) =>
+        liked
+          ? prevLikes.filter((like: ILike) => like.postId !== postId)
+          : [...prevLikes, { id: Date.now(), postId, userName: 'Você', likeUserId: '1' }]
+      );
+    } catch (error) {
+      console.error('Error toggling like:', error);
     }
-  };
+  }, []);
 
-  return { getLikes, toggleLike, loading, error };
+  return { likes, getLikes, toggleLike };
 };

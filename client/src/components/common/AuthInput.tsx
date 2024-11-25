@@ -3,7 +3,8 @@ interface AuthInputProps {
     label: string,
     type: string,
     htmlForAndNameAndId: string,
-    value?: string
+    placeholder?: string,
+    value?: string,
 }
 
 function AuthInput(props: AuthInputProps) {
@@ -17,6 +18,7 @@ function AuthInput(props: AuthInputProps) {
                 required
                 onChange={(e) => props.newState(e.currentTarget.value)}
                 value={props.value}
+                placeholder={props.placeholder}
                 className="py-2 px-3 border-gray-400 border-b w-full focus-visible:border-gray-600 focus-visible:border-b focus-visible:outline-none" />
         </div>
     );
