@@ -1,29 +1,31 @@
 export interface IPost {
     id: number;
-    profilePicture: string;
     author: string;
-    description: string;
-    image: string;
+    profilePicture: string;
+    description?: string;
+    image?: string;
+    video?: string;
+    file?: string;
     createdPost: string;
     ngoId: number;
-}
-
-export interface ILike {
-    id: number;
-    userName: string;
-    likeUserId: number;
-    postId: number
-}
-
+  }  
+  
 export interface IComment {
     id: number;
-    comment: number;
+    commentContent: string;
     userName: string;
     userImg: string;
     commentUserId: number;
-    postId: number
+    postId: number;
     createdComment: string;
-}
+  }
+  
+export interface ILike {
+    id: number;
+    userName: string;
+    likeUserId: string;
+    postId: number;
+  }  
 
 export interface IUser {
     id: number;

@@ -12,14 +12,14 @@ export const dataTestimonialsSection: IDataTestimonialsSection[] = [{
     ocupation: 'Idealizador do projeto e desenvolvedor front-end',
 },{
     id: 1,
-    text: '',
-    author: '',
-    ocupation: '',
+    text: 'E notei que preciso que haja essas contribuições através da internet para entregar esse projeto social a sociedade, pois é necessário que seja divulgado para todos que elas notem não só o meu trabalho, mas de muitos que estão pelo mundo ajudando quem e o que precisa de nós.',
+    author: 'Conceição',
+    ocupation: 'Lider de ONG',
 },{
     id: 2,
-    text: '',
-    author: '',
-    ocupation: '',
+    text: 'é extremamente gratificante ver o sorriso no rosto de alguém ou simplesmente deixar o outro feliz. É um impacto que talvez as instituições públicas ou privadas não consigam fazer com todos, então estamos ali para complementar nesse trabalho de ajuda.',
+    author: 'Islaine',
+    ocupation: 'Integrante de ONG',
 },{
     id: 3,
     text: 'Tem sido uma experiência incrivelmente gratificante e enriquecedora. Saber que estou contribuindo para iniciativas que visam causar um impacto positivo na sociedade me enche de orgulho e motivação. Cada dia traz novos desafios e oportunidades para aprender, o que me permite crescer tanto profissionalmente quanto pessoalmente."',

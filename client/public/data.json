@@ -1,0 +1,217 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "profilePicture": "https://example.com/ngos/ngo1.jpg",
+            "author": "Crianças Felizes",
+            "description": "Aliquam purus nisi, malesuada vel.",
+            "image": "https://media.gettyimages.com/id/1167552352/pt/foto/volunteer-together-pick-up-trash-in-the-park.jpg?s=612x612&w=0&k=20&c=3FkrmzI7tc1U4D06pvYQyfV-bC-hEdFPwnrvtInTIdQ=",
+            "createdPost": "2024-08-01T10:00:00Z",
+            "ngoId": 101
+        },
+        {
+            "id": 2,
+            "profilePicture": "https://example.com/ngos/ngo2.jpg",
+            "author": "GreenEarth",
+            "description": "Organizing a food drive for the community",
+            "image": "https://example.com/posts/post2.jpg",
+            "createdPost": "2024-08-05T14:30:00Z",
+            "ngoId": 102
+        },
+        {
+            "id": 3,
+            "profilePicture": "https://example.com/ngos/ngo3.jpg",
+            "author": "AnimalShelter",
+            "description": "Volunteering at the animal shelter",
+            "image": "https://example.com/posts/post3.jpg",
+            "createdPost": "2024-08-10T09:15:00Z",
+            "ngoId": 103
+        },
+        {
+            "id": 4,
+            "profilePicture": "https://example.com/ngos/ngo4.jpg",
+            "author": "EducationForAll",
+            "description": "Teaching kids how to code",
+            "image": "https://example.com/posts/post4.jpg",
+            "createdPost": "2024-08-15T13:45:00Z",
+            "ngoId": 104
+        },
+        {
+            "id": 5,
+            "profilePicture": "https://example.com/ngos/ngo5.jpg",
+            "author": "GreenNeighborhood",
+            "description": "Planting trees in the neighborhood",
+            "image": "https://example.com/posts/post5.jpg",
+            "createdPost": "2024-08-20T08:00:00Z",
+            "ngoId": 105
+        }
+    ],
+    "likes": [
+        {
+            "id": 1,
+            "userName": "johnsmith123",
+            "likeUserId": 1,
+            "postId": 1
+        },
+        {
+            "id": 2,
+            "userName": "janedoe456",
+            "likeUserId": 2,
+            "postId": 1
+        },
+        {
+            "id": 3,
+            "userName": "robertj789",
+            "likeUserId": 3,
+            "postId": 2
+        },
+        {
+            "id": 4,
+            "userName": "emilydavis321",
+            "likeUserId": 4,
+            "postId": 3
+        },
+        {
+            "id": 5,
+            "userName": "michaelbrown654",
+            "likeUserId": 5,
+            "postId": 4
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "commentContent": "Great initiative! Keep it up!",
+            "userName": "janedoe456",
+            "userImg": "https://example.com/profiles/user2.jpg",
+            "commentUserId": 2,
+            "postId": 1,
+            "createdComment": "2024-08-02T11:00:00Z"
+        },
+        {
+            "id": 2,
+            "commentContent": "This is so inspiring!",
+            "userName": "robertj789",
+            "userImg": "https://example.com/profiles/user3.jpg",
+            "commentUserId": 3,
+            "postId": 2,
+            "createdComment": "2024-08-06T15:00:00Z"
+        },
+        {
+            "id": 3,
+            "commentContent": "Love seeing this kind of work!",
+            "userName": "emilydavis321",
+            "userImg": "https://example.com/profiles/user4.jpg",
+            "commentUserId": 4,
+            "postId": 3,
+            "createdComment": "2024-08-11T10:00:00Z"
+        },
+        {
+            "id": 4,
+            "commentContent": "Amazing effort!",
+            "userName": "michaelbrown654",
+            "userImg": "https://example.com/profiles/user5.jpg",
+            "commentUserId": 5,
+            "postId": 4,
+            "createdComment": "2024-08-16T14:00:00Z"
+        },
+        {
+            "id": 5,
+            "commentContent": "Well done!",
+            "userName": "johnsmith123",
+            "userImg": "https://example.com/profiles/user1.jpg",
+            "commentUserId": 1,
+            "postId": 5,
+            "createdComment": "2024-08-21T09:00:00Z"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "fullName": "John Smith",
+            "userName": "johnsmith123",
+            "emailUser": "john.smith@example.com",
+            "phoneNumberUser": "+1234567890",
+            "passwordUser": "password123",
+            "userImg": "https://example.com/profiles/user1.jpg"
+        },
+        {
+            "id": 2,
+            "fullName": "Jane Doe",
+            "userName": "janedoe456",
+            "emailUser": "jane.doe@example.com",
+            "phoneNumberUser": "+0987654321",
+            "passwordUser": "password456",
+            "userImg": "https://example.com/profiles/user2.jpg"
+        },
+        {
+            "id": 3,
+            "fullName": "Robert Johnson",
+            "userName": "robertj789",
+            "emailUser": "robert.johnson@example.com",
+            "phoneNumberUser": "+1122334455",
+            "passwordUser": "password789",
+            "userImg": "https://example.com/profiles/user3.jpg"
+        },
+        {
+            "id": 4,
+            "fullName": "Emily Davis",
+            "userName": "emilydavis321",
+            "emailUser": "emily.davis@example.com",
+            "phoneNumberUser": "+6677889900",
+            "passwordUser": "password321",
+            "userImg": "https://example.com/profiles/user4.jpg"
+        },
+        {
+            "id": 5,
+            "fullName": "Michael Brown",
+            "userName": "michaelbrown654",
+            "emailUser": "michael.brown@example.com",
+            "phoneNumberUser": "+4455667788",
+            "passwordUser": "password654",
+            "userImg": "https://example.com/profiles/user5.jpg"
+        }
+    ],
+    "ngos": [
+        {
+            "id": 101,
+            "cnpj": "12.345.678/0001-00",
+            "stateRegistration": "123456789",
+            "corporateReason": "Helping Hands NGO",
+            "emailNgo": "contact@helpinghands.org",
+            "phoneNumberNgo": "+1234567890",
+            "physicalAddress": "123 Charity St, City, Country",
+            "objectiveOfTheNgo": "Providing aid to underprivileged communities.",
+            "pageName": "HelpingHands",
+            "imageNgo": "https://example.com/ngos/ngo1.jpg",
+            "bgImageNgo": "https://example.com/ngos/bg1.jpg",
+            "registeringUser": "johnsmith123"
+        },
+        {
+            "id": 102,
+            "cnpj": "23.456.789/0001-11",
+            "stateRegistration": "987654321",
+            "corporateReason": "Green Earth NGO",
+            "emailNgo": "info@greenearth.org",
+            "phoneNumberNgo": "+0987654321",
+            "physicalAddress": "456 Nature Ave, City, Country",
+            "objectiveOfTheNgo": "Promoting environmental sustainability.",
+            "pageName": "GreenEarth",
+            "imageNgo": "https://example.com/ngos/ngo2.jpg",
+            "bgImageNgo": "https://example.com/ngos/bg2.jpg",
+            "registeringUser": "janedoe456"
+        },
+        {
+            "id": 103,
+            "cnpj": "34.567.890/0001-22",
+            "stateRegistration": "192837465",
+            "corporateReason": "Animal Shelter NGO",
+            "emailNgo": "support@animalshelter.org",
+            "phoneNumberNgo": "+1122334455",
+            "physicalAddress": "789 Paw St, City, Country",
+            "objectiveOfTheNgo": "Rescuing and sheltering stray animals.",
+            "pageName": "AnimalShelter",
+            "imageNgo": "https://example.com/ngos/ngo3"
+        }
+    ]
+}
